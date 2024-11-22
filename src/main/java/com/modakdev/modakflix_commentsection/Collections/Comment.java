@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@Document(collation = "comments")
+@Document(collection = "comment")
 public class Comment {
 
     @Id
@@ -17,6 +17,7 @@ public class Comment {
     private String userId;
     private String content;
     private String parentId;
+    private boolean isUpdated=false;
     private List<String> mentions; // User IDs mentioned in this comment
     private LocalDateTime createdAt; // Timestamp for creation
     private LocalDateTime updatedAt; // Timestamp for the last update
@@ -32,6 +33,14 @@ public class Comment {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isUpdated() {
+        return isUpdated;
+    }
+
+    public void setUpdated(boolean updated) {
+        isUpdated = updated;
     }
 
     public String getPostId() {

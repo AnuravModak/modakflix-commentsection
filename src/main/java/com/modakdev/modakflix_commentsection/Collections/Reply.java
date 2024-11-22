@@ -8,12 +8,10 @@ public class Reply {
     private String id;
     private String userId;
     private String content;
+    private boolean isUpdated=false;
     private LocalDateTime createdAt;
     private List<String> mentions;
-
-    public Reply() {
-        this.id= UUID.randomUUID().toString();
-    }
+    private LocalDateTime updatedAt;
 
     public Reply(String id, String userId, String content, LocalDateTime createdAt, List<String> mentions) {
         this.id = id;
@@ -21,6 +19,26 @@ public class Reply {
         this.content = content;
         this.createdAt = createdAt;
         this.mentions = mentions;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public boolean isUpdated() {
+        return isUpdated;
+    }
+
+    public void setUpdated(boolean updated) {
+        isUpdated = updated;
+    }
+
+    public Reply() {
+        this.id= UUID.randomUUID().toString();
     }
 
     public String getId() {

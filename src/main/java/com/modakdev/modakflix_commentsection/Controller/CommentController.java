@@ -47,11 +47,32 @@ public class CommentController {
         return ResponseEntity.ok(commentService.addReply(parentId, reply));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Comment> updateComment(
+            @PathVariable String id,
+            @RequestBody String newContent) {
+        Comment updatedComment = commentService.updateComment(id, newContent);
+        return ResponseEntity.ok(updatedComment);
+    }
 
+    @PutMapping("/{commentId}/replies/{replyId}")
+    public ResponseEntity<Comment> updateReply(
+            @PathVariable String commentId,
+            @PathVariable String replyId,
+            @RequestBody String newContent) {
+        Comment updatedComment = commentService.updateReply(commentId, replyId, newContent);
+        return ResponseEntity.ok(updatedComment);
+    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCommentById(@PathVariable String id) {
-        commentService.deleteComment(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity deleteCommentById(@PathVariable String id) {
+
+        return ResponseEntity.ok(commentService.deleteComment(id));
+    }
+
+    @DeleteMapping("/{commentId}/reply/{replyId}")
+    public ResponseEntity deleteRelyById(@PathVariable String commentId, @PathVariable String replyId){
+        Comment updatedComment = commentService.deleteReply(commentId, replyId);
+        return ResponseEntity.ok(updatedComment);
     }
 }
