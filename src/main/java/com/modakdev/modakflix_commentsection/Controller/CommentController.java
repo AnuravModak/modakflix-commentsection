@@ -21,6 +21,11 @@ public class CommentController {
         this.commentService=commentService;
     }
 
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<Comment>> getAllComments(){
+        return  ResponseEntity.ok(commentService.getAllComments());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Comment>> getCommentById(@PathVariable String id){
         return ResponseEntity.ok(commentService.getCommentById(id));
@@ -34,6 +39,11 @@ public class CommentController {
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Comment>> getCommentByUserId(@PathVariable String userId) {
         return ResponseEntity.ok(commentService.getCommentsByUserId(userId));
+    }
+
+    @GetMapping("/{commentId}/replies")
+    public ResponseEntity getRepliesByCommentId(@PathVariable String commentId){
+        return ResponseEntity.ok(commentService.getRepliesByCommentId(commentId));
     }
 
     @PostMapping
